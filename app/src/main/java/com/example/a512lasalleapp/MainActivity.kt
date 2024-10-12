@@ -119,12 +119,12 @@ class MainActivity : ComponentActivity() {
                         composable(
                             route = "change_password"
                         ) {
-                            ChangePasswordScreen(innerPadding = innerPadding)
+                            ChangePasswordScreen(innerPadding = innerPadding, navController = navController)
                         }
                         composable(
                             route = "change_theme"
                         ) {
-                            ChangeThemeScreen(innerPadding = innerPadding)
+                            ChangeThemeScreen(innerPadding = innerPadding, navController = navController)
                         }
                         composable(route = "payments") {
                             PaymentsScreen(innerPadding = innerPadding, navController = navController)
@@ -136,8 +136,6 @@ class MainActivity : ComponentActivity() {
                             val subjectName = it.arguments?.getString("subjectName") ?: "Sin título"
                             SubjectDetailsScreen(subjectName = subjectName, innerPadding = innerPadding)
                         }
-
-
                         composable(
                             route = Screens.NewsDetail.route + "/{id}",
                             arguments = listOf(
