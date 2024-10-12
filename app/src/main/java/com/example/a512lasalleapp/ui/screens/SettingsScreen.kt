@@ -39,9 +39,9 @@ fun SettingsScreen(innerPadding: PaddingValues, navController: NavController) {
                     .size(120.dp)
                     .clip(CircleShape)
             )
-            Text("Bardo Arion", style = MaterialTheme.typography.bodyLarge)
+            Text("Juan Frausto", style = MaterialTheme.typography.bodyLarge)
             Text("Fecha de nacimiento: 01/01/2000", style = MaterialTheme.typography.bodyLarge)
-            Text("Correo: arion.aranda@lasalle.edu.mx", style = MaterialTheme.typography.bodyLarge)
+            Text("Correo: juan.frausto@lasalle.edu.mx", style = MaterialTheme.typography.bodyLarge)
 
             Spacer(modifier = Modifier.height(20.dp))
 
