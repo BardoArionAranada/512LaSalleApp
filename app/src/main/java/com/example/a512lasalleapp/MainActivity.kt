@@ -29,10 +29,14 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.a512lasalleapp.ui.screens.CalendarScreen
+import com.example.a512lasalleapp.ui.screens.ChangePasswordScreen
+import com.example.a512lasalleapp.ui.screens.ChangeThemeScreen
 import com.example.a512lasalleapp.ui.screens.GradesScreen
 import com.example.a512lasalleapp.ui.screens.HomeScreen
 import com.example.a512lasalleapp.ui.screens.NewsDetailScreen
+import com.example.a512lasalleapp.ui.screens.PaymentsScreen
 import com.example.a512lasalleapp.ui.screens.SettingsScreen
+import com.example.a512lasalleapp.ui.screens.SubjectDetailsScreen
 import com.example.a512lasalleapp.ui.theme._512LaSalleAppTheme
 import com.example.a512lasalleapp.ui.utils.Screens
 import com.example.a512lasalleapp.ui.utils.bottomNavBarItems
@@ -59,7 +63,7 @@ class MainActivity : ComponentActivity() {
                 Scaffold(
                     modifier = Modifier.fillMaxSize(),
                     bottomBar = {
-                        if(currentRoute in bottomNavRoutes){
+                        if (currentRoute in bottomNavRoutes) {
                             AnimatedNavigationBar(
                                 selectedIndex = selectedItemIndex,
                                 modifier = Modifier.height(90.dp),
@@ -97,36 +101,56 @@ class MainActivity : ComponentActivity() {
                                 }
                             }
                         }
-
                     }
                 ) { innerPadding ->
                     NavHost(navController = navController, startDestination = Screens.Home.route) {
                         composable(route = Screens.Home.route) {
                             HomeScreen(innerPadding = innerPadding, navController = navController)
                         }
-                        composable(route = Screens.Calendar.route){
+                        composable(route = Screens.Calendar.route) {
                             CalendarScreen(innerPadding = innerPadding)
                         }
-                        composable(route = Screens.Grades.route){
-                            GradesScreen(innerPadding = innerPadding)
+                        composable(route = Screens.Grades.route) {
+                            GradesScreen(innerPadding = innerPadding, navController = navController)
                         }
                         composable(route = Screens.Settings.route) {
-                            SettingsScreen(innerPadding = innerPadding)
+                            SettingsScreen(innerPadding = innerPadding, navController = navController)
                         }
                         composable(
-                            route = Screens.NewsDetail.route+"/{id}",
+                            route = "change_password"
+                        ) {
+                            ChangePasswordScreen(innerPadding = innerPadding)
+                        }
+                        composable(
+                            route = "change_theme"
+                        ) {
+                            ChangeThemeScreen(innerPadding = innerPadding)
+                        }
+                        composable(route = "payments") {
+                            PaymentsScreen(innerPadding = innerPadding, navController = navController)
+                        }
+                        composable(
+                            route = "subject_details/{subjectName}",
+                            arguments = listOf(navArgument("subjectName") { type = NavType.StringType })
+                        ) {
+                            val subjectName = it.arguments?.getString("subjectName") ?: "Sin título"
+                            SubjectDetailsScreen(subjectName = subjectName, innerPadding = innerPadding)
+                        }
+
+
+                        composable(
+                            route = Screens.NewsDetail.route + "/{id}",
                             arguments = listOf(
-                                navArgument("id"){
+                                navArgument("id") {
                                     type = NavType.IntType
                                     nullable = false
                                 }
                             )
                         ) {
-                            val id = it.arguments?.getInt("id",0) ?: 0
-                            NewsDetailScreen(newsId=id,innerPadding = innerPadding)
+                            val id = it.arguments?.getInt("id", 0) ?: 0
+                            NewsDetailScreen(newsId = id, innerPadding = innerPadding)
                         }
                     }
-
                 }
             }
         }
