@@ -28,7 +28,6 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.a512lasalleapp.R
-import com.example.a512lasalleapp.ui.components.ScreenTemplate
 import com.example.a512lasalleapp.ui.theme._512LaSalleAppTheme
 
 @Composable
@@ -94,7 +93,7 @@ fun SettingsScreen(innerPadding: PaddingValues, navController: NavController) {
                 )
             }
         }
-        // Imagen de perfil
+        // Imagen de perfil y detalles del alumno
         Column(
             modifier = Modifier
                 .fillMaxWidth()
@@ -108,6 +107,10 @@ fun SettingsScreen(innerPadding: PaddingValues, navController: NavController) {
                     .size(120.dp)
                     .clip(CircleShape)
             )
+            Spacer(modifier = Modifier.height(8.dp))
+            Text("Bardo Arion Aranda", style = MaterialTheme.typography.bodyLarge)
+            Text("Fecha de nacimiento: 15/09/2002", style = MaterialTheme.typography.bodyLarge)
+            Text("Correo: Ba78522@lasallebajio.edu.mx", style = MaterialTheme.typography.bodyLarge)
         }
 
         // Cuerpo con las opciones
